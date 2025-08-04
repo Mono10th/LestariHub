@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TEAM MONO Sustainable Platform</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --main-green: #3a7d44;
+        --dark-green: #2e5e33;
+        --light-green: #f5f9f6;
+        --danger: #d9534f;
+        --danger-dark: #c9302c;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* A slightly more modern font */
+        background-color: var(--light-green);
+        color: var(--dark-green);
+        transition: background-color 0.3s, color 0.3s;
+        min-height: 100vh; /* Ensure body takes full height for login background */
+      }
+
+      /* Dark mode styles */
+      body.dark-mode {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+      }
+      body.dark-mode .login-box,
+      body.dark-mode .onboarding,
+      body.dark-mode .section {
+        background: #2a2a2a;
+        color: #e0e0e0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      }
+      body.dark-mode .login-box input {
+        background-color: #333;
+        border-color: #555;
+        color: #e0e0e0;
+      }
+      body.dark-mode .login-box a {
+        color: #b0e0bb;
+      }
+      body.dark-mode .sidebar {
+        background: var(
+          --dark-green
+        ); /* Slightly darker green for dark mode sidebar */
+      }
+      body.dark-mode .sidebar a:hover,
+      body.dark-mode .sidebar button:hover {
+        background: #3a7d44; /* Adjust hover for dark mode sidebar */
+      }
+
+      /* Login Page Background */
+      body.login-background {
+        background-image: url("http://googleusercontent.com/file_content/0"); /* Using the uploaded image for the background */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative; /* Needed for pseudo-element positioning */
+        z-index: 1; /* Ensure login box is above overlay */
+      }
+
+      /* Semi-transparent overlay for login page background */
+      .login-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+        z-index: -1; /* Behind the login box */
+        display: block; /* Ensure it's always there with login-container */
+      }
+      body.dark-mode .login-container::before {
+        background: rgba(
+          0,
+          0,
+          0,
+          0.6
+        ); /* Slightly darker overlay for dark mode */
+      }
+
+      .login-box {
+        background: rgba(
+          255,
+          255,
+          255,
+          0.95
+        ); /* Slightly transparent white for better blend */
+        padding: 2.5rem; /* Slightly more padding */
+        border-radius: 12px; /* More rounded corners */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+        width: 350px; /* Slightly wider */
+        text-align: center;
+        color: var(--dark-green); /* Ensure text color is readable */
+        box-sizing: border-box; /* Include padding in width */
+      }
+      .login-box h2 {
+        margin-bottom: 1.5rem; /* More space below title */
+        font-size: 1.8rem; /* Larger title */
+        color: var(--main-green); /* Green title */
+      }
+      .login-box input {
+        width: calc(100% - 20px); /* Adjust for padding */
+        padding: 0.8rem 10px; /* More padding in inputs */
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px; /* Rounded input fields */
+        font-size: 1rem;
+      }
+      .login-box button {
+        width: 100%;
+        padding: 0.9rem; /* More padding for buttons */
+        background: var(--main-green);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.1rem;
+        transition: background 0.3s ease;
+      }
+      .login-box button:hover {
+        background: var(--dark-green);
+      }
+      .login-box a {
+        display: block;
+        margin-top: 1rem; /* More space for links */
+        color: var(--dark-green);
+        text-decoration: none; /* No underline by default */
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: color 0.3s ease, text-decoration 0.3s ease;
+      }
+      .login-box a:hover {
+        color: var(--main-green); /* Green on hover */
+        text-decoration: underline;
+      }
+      .error-message {
+        color: var(--danger);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+      }
+
+      .onboarding {
+        display: none;
+        background: white;
+        padding: 3rem; /* More padding */
+        margin: 4rem auto; /* Larger margins */
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 650px; /* Wider onboarding */
+        text-align: center;
+        color: var(--dark-green);
+      }
+      .onboarding h2 {
+        color: var(--main-green);
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      .onboarding p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+      .onboarding button {
+        padding: 0.8rem 2rem;
+        background: var(--main-green);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+      }
+      .onboarding button:hover {
+        background: var(--dark-green);
+      }
+
+      /* Sidebar and Main Content Layout */
+      .app {
+        display: flex; /* Use flexbox for sidebar and main content */
+        min-height: 100vh; /* Ensure app takes full height */
+      }
+
+      .sidebar {
+        flex: 0 0 250px; /* Fixed width sidebar */
+        background: var(--main-green);
+        color: white;
+        padding-top: 1.5rem; /* More padding at top */
+        padding-bottom: 1.5rem; /* ADDED: Ensure space for logout button */
+        overflow-y: auto;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        display: flex;
+        flex-direction: column; /* Arrange items vertically */
+      }
+      .sidebar h2 {
+        text-align: center;
+        margin-bottom: 2rem; /* More space below title */
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+      }
+      .sidebar a,
+      .sidebar button {
+        display: block;
+        width: 100%;
+        color: white;
+        padding: 12px 20px; /* More padding */
+        background: none;
+        border: none;
+        text-align: left;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none; /* No underline */
+        font-size: 1.05rem;
+        transition: background 0.2s ease, padding-left 0.2s ease;
+      }
+      .sidebar a:hover,
+      .sidebar button:hover {
+        background: var(--dark-green);
+        padding-left: 25px; /* Slight indent on hover */
+      }
+      .sidebar a.active {
+        /* Style for active sidebar link */
+        background: var(--dark-green);
+        border-left: 5px solid white; /* Highlight active link */
+        padding-left: 15px; /* Adjust padding due to border */
+      }
+      .logout-btn {
+        background: var(--danger);
+        margin-top: auto; /* Push logout button to the bottom */
+        border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+      }
+      .logout-btn:hover {
+        background: var(--danger-dark);
+      }
+
+      .main {
+        flex-grow: 1; /* Takes remaining space */
+        padding: 2rem; /* More overall padding */
+      }
+      .section {
+        margin-bottom: 2.5rem; /* More space between sections */
+        background: white;
+        padding: 2rem; /* More padding inside sections */
+        border-radius: 12px; /* More rounded corners */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        color: var(--dark-green);
+      }
+      .section h2,
+      .section h3,
+      .section h4 {
+        color: var(--main-green);
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+      }
+      .section p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .section ul {
+        list-style-type: none; /* Remove default bullet points */
+        padding-left: 0;
+      }
+      .section ul li {
+        margin-bottom: 0.8rem;
+        padding-left: 1.5rem; /* Space for custom bullet */
+        position: relative;
+      }
+      .section ul li::before {
+        content: "🌱"; /* Custom bullet point emoji */
+        position: absolute;
+        left: 0;
+        color: var(--main-green);
+      }
+      .section ul li:last-child {
+        margin-bottom: 0;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      iframe {
+        width: 100%;
+        height: 350px; /* Slightly taller map */
+        border: 1px solid #eee; /* Light border around map */
+        border-radius: 8px;
+      }
+
+      .settings input[type="range"] {
+        width: 100%;
+      }
+      .settings label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.8rem;
+        font-size: 1rem;
+      }
+      .settings input[type="checkbox"] {
+        margin-right: 10px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+      .settings button {
+        padding: 0.7rem 1.5rem;
+        background: var(--dark-green);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+      .settings button:hover {
+        background: #2e5e33d0;
+      }
+
+      .dark-toggle {
+        display: block; /* Make it a block element */
+        margin-top: 2rem; /* Add some space above */
+        width: fit-content; /* Fit button content */
+        padding: 0.8rem 1.5rem;
+        background: #555;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+      .dark-toggle:hover {
+        background: #333;
+      }
+      body.dark-mode .dark-toggle {
+        background: #444;
+      }
+      body.dark-mode .dark-toggle:hover {
+        background: #666;
+      }
+    </style>
+    <script>
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      function saveUser(user) {
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+      }
+
+      function register() {
+        const name = document.getElementById("reg-name").value;
+        const email = document.getElementById("reg-email").value;
+        const password = document.getElementById("reg-password").value;
+        const phone = document.getElementById("reg-phone").value;
+        const address = document.getElementById("reg-address").value;
+
+        if (!name || !email || !password) {
+          alert("Please fill out all required fields.");
+          return;
+        }
+
+        const existing = users.find((u) => u.email === email);
+        if (existing) {
+          alert("An account with this email already exists.");
+          return;
+        }
+
+        // Initialize user with some default stats for the dashboard/profile
+        saveUser({
+          name,
+          email,
+          password,
+          phone,
+          address,
+          points: 0,
+          rank: "Unranked",
+          co2Saved: "0",
+          rvmUses: 0,
+          recyclingRate: "0%",
+          lastRvmUse: "Never",
+          lastEcoChallenge: "Never",
+          fundsRaised: "0.00", // Initialize funds raised for new users
+        });
+        alert("Registration successful! Please log in.");
+        document.getElementById("register-box").style.display = "none";
+        document.getElementById("login-container").style.display = "flex";
+      }
+
+      function login() {
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const errorMessage = document.getElementById("error-message");
+
+        const user = users.find(
+          (u) => u.email === email && u.password === password
+        );
+
+        if (user) {
+          localStorage.setItem("loggedInUser", JSON.stringify(user));
+          showApp(user);
+          errorMessage.innerText = "";
+        } else {
+          errorMessage.innerText =
+            "Invalid email or password. Please try again.";
+        }
+      }
+
+      // Function to show specific sections and update active sidebar link
+      function showSection(sectionId) {
+        // Hide all main content sections
+        document.querySelectorAll(".main .section").forEach((section) => {
+          section.style.display = "none";
+        });
+
+        // Show the requested section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          targetSection.style.display = "block";
+        }
+
+        // Update active sidebar link styling
+        document.querySelectorAll(".sidebar a").forEach((link) => {
+          link.classList.remove("active");
+        });
+        const activeLink = document.querySelector(
+          `.sidebar a[onclick*="${sectionId}"]`
+        );
+        if (activeLink) {
+          activeLink.classList.add("active");
+        }
+      }
+
+      function showApp(user) {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("register-box").style.display = "none";
+        document.querySelector(".onboarding").style.display = "none"; // Hide onboarding if it was shown
+        document.querySelector(".app").style.display = "flex"; // Show the main app layout (sidebar + content)
+        document.body.classList.remove("login-background"); // Remove login background
+
+        // Populate user data in Profile and Dashboard
+        document.getElementById(
+          "welcome-user"
+        ).innerText = `👋 Welcome, ${user.name}!`;
+        document.getElementById("profile-name").innerText = user.name;
+        document.getElementById("profile-email").innerText = user.email;
+        document.getElementById("profile-phone").innerText =
+          user.phone || "N/A";
+        document.getElementById("profile-address").innerText =
+          user.address || "N/A";
+
+        // Dashboard specific data (example data, update with real user data if available)
+        document.getElementById("user-points").innerText = user.points || "0";
+        document.getElementById("user-rank").innerText =
+          user.rank || "Unranked";
+        document.getElementById("co2-saved").innerText = user.co2Saved || "0";
+        // Calculate trees equivalent (e.g., 1 kg CO2 saved ~ 0.05 trees, very rough estimate)
+        document.getElementById("trees-planted-equivalent").innerText = (
+          parseFloat(user.co2Saved || "0") * 0.05
+        ).toFixed(2);
+
+        document.getElementById("rvm-uses").innerText = user.rvmUses || "0";
+        document.getElementById("recycling-rate").innerText =
+          user.recyclingRate || "0%";
+        document.getElementById("profile-recycling-rate").innerText =
+          user.recyclingRate || "0%"; // For profile page
+
+        document.getElementById("last-rvm-use").innerText =
+          user.lastRvmUse || "Never";
+        document.getElementById("last-eco-challenge").innerText =
+          user.lastEcoChallenge || "Never";
+
+        // Update funds raised - Using a static value for now as it's a global event total
+        document.getElementById("funds-raised").innerText = "5,250.00"; // Global static value, not user.fundsRaised
+
+        // Initialize by showing the Dashboard section
+        showSection("dashboard-section");
+      }
+
+      function logout() {
+        localStorage.removeItem("loggedInUser");
+        document.querySelector(".app").style.display = "none";
+        document.querySelector(".onboarding").style.display = "none";
+        document.getElementById("login-container").style.display = "flex"; // Show login again
+        document.body.classList.add("login-background"); // Add login background back
+      }
+
+      function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+      }
+
+      function checkLogin() {
+        const savedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        if (savedUser) {
+          showApp(savedUser);
+        } else {
+          // If not logged in, ensure login page is shown with background
+          document.getElementById("login-container").style.display = "flex";
+          document.getElementById("register-box").style.display = "none"; // Hide register
+          document.body.classList.add("login-background");
+        }
+      }
+
+      function showRegister() {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("register-box").style.display = "flex";
+      }
+
+      function forgotPassword() {
+        alert(
+          "Password recovery is not implemented yet. Please contact support or register again."
+        );
+      }
+    </script>
+  </head>
+  <body onload="checkLogin()">
+    <div class="login-container" id="login-container">
+      <div class="login-box">
+        <h2>Login to TEAM MONO 🌍</h2>
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <p id="error-message" class="error-message"></p>
+        <button onclick="login()">Login</button>
+        <a onclick="showRegister()">Don't have an account? Register!</a>
+        <a onclick="forgotPassword()">Forgot Password?</a>
+      </div>
+    </div>
+
+    <div class="login-container" id="register-box" style="display: none">
+      <div class="login-box">
+        <h2>Join TEAM MONO 💚</h2>
+        <input type="text" id="reg-name" placeholder="Full Name" required />
+        <input
+          type="email"
+          id="reg-email"
+          placeholder="Email Address"
+          required
+        />
+        <input
+          type="password"
+          id="reg-password"
+          placeholder="Choose a Strong Password"
+          required
+        />
+        <input type="text" id="reg-phone" placeholder="Phone (Optional)" />
+        <input type="text" id="reg-address" placeholder="Address (Optional)" />
+        <button onclick="register()">Register Account</button>
+        <a
+          onclick="document.getElementById('register-box').style.display='none'; document.getElementById('login-container').style.display='flex';"
+          >Already have an account? Back to Login</a
+        >
+      </div>
+    </div>
+
+    <div class="onboarding" style="display: none">
+      <h2>Welcome to TEAM MONO! 🌱</h2>
+      <p>
+        Thank you for joining our sustainable platform. We're excited to have
+        you on board to make a positive impact on our environment!
+      </p>
+      <button
+        onclick="document.querySelector('.onboarding').style.display='none'; showApp(JSON.parse(localStorage.getItem('loggedInUser')));"
+      >
+        Let's Go! View Dashboard ✨
+      </button>
+    </div>
+
+    <div class="app" style="display: none">
+      <div class="sidebar">
+        <h2>TEAM MONO</h2>
+        <a href="#" onclick="showSection('dashboard-section')">📊 Dashboard</a>
+        <a href="#" onclick="showSection('profile-section')">👤 Profile</a>
+        <a href="#" onclick="showSection('rewards-section')">🎁 Rewards</a>
+        <a href="#" onclick="showSection('settings-section')">⚙️ Settings</a>
+        <button class="logout-btn" onclick="logout()">👋 Logout</button>
+      </div>
+      <div class="main">
+        <div class="section" id="dashboard-section">
+          <h2 id="welcome-user">👋 Welcome!</h2>
+          <p>
+            Your current points:
+            <strong><span id="user-points">0</span> points</strong> | Global
+            Rank: <strong>#<span id="user-rank">Unranked</span></strong>
+          </p>
+
+          <h3>🌿 Eco Commute Challenge Progress</h3>
+          <p>
+            You’ve bravely saved
+            <strong><span id="co2-saved">0</span> kg CO₂</strong> by choosing
+            eco-friendly travel methods! Keep up the great work!
+          </p>
+          <p>
+            *(This is equivalent to planting
+            <span id="trees-planted-equivalent">0</span> trees!)*
+          </p>
+          <p>
+            Through your participation in the Eco Commute Challenge, a total of
+            <strong>$ <span id="funds-raised">5,250.00</span></strong> has been
+            raised for environmental initiatives! Thank you for your
+            contribution! 💰
+          </p>
+
+          <h3>♻️ RVM Activity & Recycling Impact</h3>
+          <p>
+            You’ve utilized the Reverse Vending Machine
+            <strong><span id="rvm-uses">0</span> times</strong>, making a real
+            difference!
+          </p>
+          <p>
+            Your overall recycling rate is
+            <strong><span id="recycling-rate">0%</span></strong
+            >. Let's aim higher!
+          </p>
+          <h4>📍 Find a Reverse Vending Machine Nearby</h4>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15949.63738092285!2d114.8690947!3d4.9806456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3222e430d47d066b%3A0x867c2e2c5e5c7a40!2sTanjong%20Batu%20Beach!5e0!3m2!1sen!2sbn!4v1700000000000!5m2!1sen!2sbn"
+            width="100%"
+            height="350"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <p
+            style="
+              font-size: 0.9em;
+              text-align: center;
+              margin-top: 10px;
+              color: #666;
+            "
+          >
+            *Use the map to locate the nearest RVMs and contribute to a greener
+            Brunei!*
+          </p>
+        </div>
+
+        <div class="section" id="profile-section" style="display: none">
+          <h2>👤 Your Personal Profile</h2>
+          <p><strong>Full Name:</strong> <span id="profile-name"></span></p>
+          <p>
+            <strong>Email Address:</strong> <span id="profile-email"></span>
+          </p>
+          <p><strong>Phone Number:</strong> <span id="profile-phone"></span></p>
+          <p>
+            <strong>Residential Address:</strong>
+            <span id="profile-address"></span>
+          </p>
+          <p>
+            <strong>Overall Recycling Rate:</strong>
+            <span id="profile-recycling-rate">0%</span>
+          </p>
+          <p style="font-size: 0.9em; color: #777">
+            *(Contact support to update your personal details)*
+          </p>
+        </div>
+
+        <div class="section" id="rewards-section" style="display: none">
+          <h2>🎁 Exclusive Rewards for You!</h2>
+          <h3>Available Rewards</h3>
+          <ul id="rewards-list">
+            <li>✨ Free Coffee Voucher (200 pts)</li>
+            <li>🚌 Public Transport Day Pass (500 pts)</li>
+            <li>🛍️ Discounted Grocery Coupon (300 pts)</li>
+            <li>👜 Eco-Friendly Tote Bag (150 pts)</li>
+            <li>💧 Reusable Water Bottle (250 pts)</li>
+            <li>🌳 Tree Planting Donation in Your Name (1000 pts)</li>
+            <li>🚴‍♂️ Bicycle Rental Discount (400 pts)</li>
+            <li>💡 Energy-Saving Light Bulbs (600 pts)</li>
+          </ul>
+
+          <h3>📊 Your Activity History</h3>
+          <p>
+            Last RVM use: <strong><span id="last-rvm-use">Never</span></strong>
+          </p>
+          <p>
+            Last Eco Challenge joined:
+            <strong><span id="last-eco-challenge">Never</span></strong>
+          </p>
+          <p style="font-size: 0.9em; color: #777">
+            *(More detailed activity logs coming soon!)*
+          </p>
+        </div>
+
+        <div class="section" id="settings-section" style="display: none">
+          <h2>⚙️ Application Settings</h2>
+          <h3>🔔 Notification Preferences</h3>
+          <label
+            ><input type="checkbox" id="push-notifications" checked /> Enable
+            Push Notifications</label
+          ><br />
+          <label
+            ><input type="checkbox" id="email-notifications" /> Receive Email
+            Notifications</label
+          ><br />
+          <label
+            ><input type="checkbox" id="sms-reminders" checked /> Send SMS
+            Reminders</label
+          >
+
+          <h3>🔒 Privacy and Data</h3>
+          <label
+            ><input type="checkbox" id="share-achievements" checked /> Allow
+            sharing my achievements publicly</label
+          >
+          <p style="font-size: 0.9em; color: #777">
+            *(Your data is safe with us. We respect your privacy.)*
+          </p>
+
+          <h3>📝 Account Management</h3>
+          <button
+            onclick="alert('Your data and activity history have been exported to a CSV file! Check your downloads folder.')"
+          >
+            Export My Data and Activity History
+          </button>
+          <button
+            onclick="alert('This feature is under development. Please contact support to change your password or delete your account.')"
+            style="margin-left: 10px"
+          >
+            Manage Account
+          </button>
+        </div>
+
+        <button class="dark-toggle" onclick="toggleDarkMode()">
+          ☀️/🌙 Toggle Dark Mode
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
