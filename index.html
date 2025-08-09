@@ -19,11 +19,11 @@
 
       body {
         margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* A slightly more modern font */
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--light-green);
         color: var(--dark-green);
         transition: background-color 0.3s, color 0.3s;
-        min-height: 100vh; /* Ensure body takes full height for login background */
+        min-height: 100vh;
       }
 
       /* Dark mode styles */
@@ -47,18 +47,16 @@
         color: #b0e0bb;
       }
       body.dark-mode .sidebar {
-        background: var(
-          --dark-green
-        ); /* Slightly darker green for dark mode sidebar */
+        background: var(--dark-green);
       }
       body.dark-mode .sidebar a:hover,
       body.dark-mode .sidebar button:hover {
-        background: #3a7d44; /* Adjust hover for dark mode sidebar */
+        background: #3a7d44;
       }
 
       /* Login Page Background */
       body.login-background {
-        background-image: url("http://googleusercontent.com/file_content/0"); /* Using the uploaded image for the background */
+        background-image: url("image_501860.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -69,8 +67,8 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        position: relative; /* Needed for pseudo-element positioning */
-        z-index: 1; /* Ensure login box is above overlay */
+        position: relative;
+        z-index: 1;
       }
 
       /* Semi-transparent overlay for login page background */
@@ -81,50 +79,40 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.4); /* Dark overlay */
-        z-index: -1; /* Behind the login box */
-        display: block; /* Ensure it's always there with login-container */
+        background: rgba(0, 0, 0, 0.4);
+        z-index: -1;
+        display: block;
       }
       body.dark-mode .login-container::before {
-        background: rgba(
-          0,
-          0,
-          0,
-          0.6
-        ); /* Slightly darker overlay for dark mode */
+        background: rgba(0, 0, 0, 0.6);
       }
 
       .login-box {
-        background: rgba(
-          255,
-          255,
-          255,
-          0.95
-        ); /* Slightly transparent white for better blend */
-        padding: 2.5rem; /* Slightly more padding */
-        border-radius: 12px; /* More rounded corners */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-        width: 350px; /* Slightly wider */
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        width: 350px;
         text-align: center;
-        color: var(--dark-green); /* Ensure text color is readable */
-        box-sizing: border-box; /* Include padding in width */
+        color: var(--dark-green);
+        box-sizing: border-box;
       }
       .login-box h2 {
-        margin-bottom: 1.5rem; /* More space below title */
-        font-size: 1.8rem; /* Larger title */
-        color: var(--main-green); /* Green title */
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        color: var(--main-green);
       }
       .login-box input {
-        width: calc(100% - 20px); /* Adjust for padding */
-        padding: 0.8rem 10px; /* More padding in inputs */
+        width: calc(100% - 20px);
+        padding: 0.8rem 10px;
         margin-bottom: 1rem;
         border: 1px solid #ddd;
-        border-radius: 6px; /* Rounded input fields */
+        border-radius: 6px;
         font-size: 1rem;
       }
       .login-box button {
         width: 100%;
-        padding: 0.9rem; /* More padding for buttons */
+        padding: 0.9rem;
         background: var(--main-green);
         color: white;
         border: none;
@@ -139,15 +127,15 @@
       }
       .login-box a {
         display: block;
-        margin-top: 1rem; /* More space for links */
+        margin-top: 1rem;
         color: var(--dark-green);
-        text-decoration: none; /* No underline by default */
+        text-decoration: none;
         font-size: 0.95rem;
         cursor: pointer;
         transition: color 0.3s ease, text-decoration 0.3s ease;
       }
       .login-box a:hover {
-        color: var(--main-green); /* Green on hover */
+        color: var(--main-green);
         text-decoration: underline;
       }
       .error-message {
@@ -160,11 +148,11 @@
       .onboarding {
         display: none;
         background: white;
-        padding: 3rem; /* More padding */
-        margin: 4rem auto; /* Larger margins */
+        padding: 3rem;
+        margin: 4rem auto;
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        max-width: 650px; /* Wider onboarding */
+        max-width: 650px;
         text-align: center;
         color: var(--dark-green);
       }
@@ -195,24 +183,31 @@
 
       /* Sidebar and Main Content Layout */
       .app {
-        display: flex; /* Use flexbox for sidebar and main content */
-        min-height: 100vh; /* Ensure app takes full height */
+        display: flex;
+        min-height: 100vh;
       }
 
       .sidebar {
-        flex: 0 0 250px; /* Fixed width sidebar */
+        flex: 0 0 250px;
         background: var(--main-green);
         color: white;
-        padding-top: 1.5rem; /* More padding at top */
-        padding-bottom: 1.5rem; /* ADDED: Ensure space for logout button */
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
         overflow-y: auto;
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
         display: flex;
-        flex-direction: column; /* Arrange items vertically */
+        flex-direction: column;
+        position: fixed;
+        height: 100%;
+        left: 0;
+        top: 0;
+        transform: translateX(0); /* Sidebar is visible by default on desktop */
+        transition: transform 0.3s ease-in-out;
+        z-index: 100;
       }
       .sidebar h2 {
         text-align: center;
-        margin-bottom: 2rem; /* More space below title */
+        margin-bottom: 2rem;
         font-size: 1.8rem;
         letter-spacing: 1px;
       }
@@ -221,45 +216,67 @@
         display: block;
         width: 100%;
         color: white;
-        padding: 12px 20px; /* More padding */
+        padding: 12px 20px;
         background: none;
         border: none;
         text-align: left;
         font-weight: bold;
         cursor: pointer;
-        text-decoration: none; /* No underline */
+        text-decoration: none;
         font-size: 1.05rem;
         transition: background 0.2s ease, padding-left 0.2s ease;
       }
       .sidebar a:hover,
       .sidebar button:hover {
         background: var(--dark-green);
-        padding-left: 25px; /* Slight indent on hover */
+        padding-left: 25px;
       }
       .sidebar a.active {
-        /* Style for active sidebar link */
         background: var(--dark-green);
-        border-left: 5px solid white; /* Highlight active link */
-        padding-left: 15px; /* Adjust padding due to border */
+        border-left: 5px solid white;
+        padding-left: 15px;
       }
       .logout-btn {
         background: var(--danger);
-        margin-top: auto; /* Push logout button to the bottom */
-        border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+        margin-top: auto;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
       .logout-btn:hover {
         background: var(--danger-dark);
       }
 
       .main {
-        flex-grow: 1; /* Takes remaining space */
-        padding: 2rem; /* More overall padding */
+        flex-grow: 1;
+        padding: 2rem;
+        margin-left: 250px;
+        transition: margin-left 0.3s ease-in-out;
       }
+
+      .main.sidebar-closed {
+        margin-left: 0;
+      }
+
+      /* Sidebar toggle button for all views */
+      .sidebar-toggle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: var(--main-green);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 1.2rem;
+        z-index: 101;
+        cursor: pointer;
+        display: none;
+      }
+
       .section {
-        margin-bottom: 2.5rem; /* More space between sections */
+        margin-bottom: 2.5rem;
         background: white;
-        padding: 2rem; /* More padding inside sections */
-        border-radius: 12px; /* More rounded corners */
+        padding: 2rem;
+        border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         color: var(--dark-green);
       }
@@ -275,16 +292,16 @@
         margin-bottom: 1rem;
       }
       .section ul {
-        list-style-type: none; /* Remove default bullet points */
+        list-style-type: none;
         padding-left: 0;
       }
       .section ul li {
         margin-bottom: 0.8rem;
-        padding-left: 1.5rem; /* Space for custom bullet */
+        padding-left: 1.5rem;
         position: relative;
       }
       .section ul li::before {
-        content: "🌱"; /* Custom bullet point emoji */
+        content: "🌱";
         position: absolute;
         left: 0;
         color: var(--main-green);
@@ -307,8 +324,8 @@
       }
       iframe {
         width: 100%;
-        height: 350px; /* Slightly taller map */
-        border: 1px solid #eee; /* Light border around map */
+        height: 350px;
+        border: 1px solid #eee;
         border-radius: 8px;
       }
 
@@ -342,9 +359,9 @@
       }
 
       .dark-toggle {
-        display: block; /* Make it a block element */
-        margin-top: 2rem; /* Add some space above */
-        width: fit-content; /* Fit button content */
+        display: block;
+        margin-top: 2rem;
+        width: fit-content;
         padding: 0.8rem 1.5rem;
         background: #555;
         color: white;
@@ -363,13 +380,80 @@
       body.dark-mode .dark-toggle:hover {
         background: #666;
       }
+
+      .redeem-btn {
+        padding: 0.7rem 1.5rem;
+        background: var(--main-green);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 1rem;
+        transition: background 0.3s ease;
+      }
+      .redeem-btn:hover {
+        background: var(--dark-green);
+      }
+
+      /* --- MOBILE RESPONSIVENESS (MEDIA QUERIES) --- */
+      @media (max-width: 768px) {
+        .app {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          flex: auto;
+          height: auto;
+          padding: 1rem 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100%;
+          z-index: 99;
+          transform: translateX(-100%); /* Hidden by default on mobile */
+          display: flex;
+          flex-direction: column;
+        }
+
+        .sidebar.active {
+          transform: translateX(0);
+        }
+
+        .sidebar-toggle {
+          display: block;
+        }
+
+        .main {
+          padding: 1rem;
+          margin-left: 0;
+          margin-top: 60px;
+        }
+
+        .main.sidebar-closed {
+          margin-left: 0;
+        }
+
+        .section {
+          padding: 1.5rem;
+        }
+      }
     </style>
     <script>
       const users = JSON.parse(localStorage.getItem("users")) || [];
+      const globalFundsRaised = 5250.0;
 
       function saveUser(user) {
-        users.push(user);
+        const userIndex = users.findIndex((u) => u.email === user.email);
+        if (userIndex !== -1) {
+          users[userIndex] = user;
+        } else {
+          users.push(user);
+        }
         localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
       }
 
       function register() {
@@ -390,7 +474,6 @@
           return;
         }
 
-        // Initialize user with some default stats for the dashboard/profile
         saveUser({
           name,
           email,
@@ -398,13 +481,12 @@
           phone,
           address,
           points: 0,
-          rank: "Unranked",
+          rank: "Newbie",
           co2Saved: "0",
           rvmUses: 0,
           recyclingRate: "0%",
           lastRvmUse: "Never",
           lastEcoChallenge: "Never",
-          fundsRaised: "0.00", // Initialize funds raised for new users
         });
         alert("Registration successful! Please log in.");
         document.getElementById("register-box").style.display = "none";
@@ -430,20 +512,16 @@
         }
       }
 
-      // Function to show specific sections and update active sidebar link
       function showSection(sectionId) {
-        // Hide all main content sections
         document.querySelectorAll(".main .section").forEach((section) => {
           section.style.display = "none";
         });
 
-        // Show the requested section
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
           targetSection.style.display = "block";
         }
 
-        // Update active sidebar link styling
         document.querySelectorAll(".sidebar a").forEach((link) => {
           link.classList.remove("active");
         });
@@ -453,16 +531,49 @@
         if (activeLink) {
           activeLink.classList.add("active");
         }
+
+        updateDashboardMetrics();
+      }
+
+      function updateDashboardMetrics() {
+        const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        if (currentUser) {
+          document.getElementById("user-points").innerText =
+            currentUser.points || "0";
+          document.getElementById("user-rank").innerText =
+            currentUser.rank || "Unranked";
+          document.getElementById("co2-saved").innerText =
+            currentUser.co2Saved || "0";
+          document.getElementById("trees-planted-equivalent").innerText = (
+            parseFloat(currentUser.co2Saved || "0") * 0.05
+          ).toFixed(2);
+          document.getElementById("rvm-uses").innerText =
+            currentUser.rvmUses || "0";
+          document.getElementById("recycling-rate").innerText =
+            currentUser.recyclingRate || "0%";
+          document.getElementById("profile-recycling-rate").innerText =
+            currentUser.recyclingRate || "0%";
+          document.getElementById("last-rvm-use").innerText =
+            currentUser.lastRvmUse || "Never";
+          document.getElementById("last-eco-challenge").innerText =
+            currentUser.lastEcoChallenge || "Never";
+          document.getElementById("funds-raised").innerText =
+            globalFundsRaised.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            });
+          document.getElementById("user-points-rewards").innerText =
+            currentUser.points || "0";
+        }
       }
 
       function showApp(user) {
         document.getElementById("login-container").style.display = "none";
         document.getElementById("register-box").style.display = "none";
-        document.querySelector(".onboarding").style.display = "none"; // Hide onboarding if it was shown
-        document.querySelector(".app").style.display = "flex"; // Show the main app layout (sidebar + content)
-        document.body.classList.remove("login-background"); // Remove login background
+        document.querySelector(".onboarding").style.display = "none";
+        document.querySelector(".app").style.display = "flex";
+        document.body.classList.remove("login-background");
 
-        // Populate user data in Profile and Dashboard
         document.getElementById(
           "welcome-user"
         ).innerText = `👋 Welcome, ${user.name}!`;
@@ -473,31 +584,8 @@
         document.getElementById("profile-address").innerText =
           user.address || "N/A";
 
-        // Dashboard specific data (example data, update with real user data if available)
-        document.getElementById("user-points").innerText = user.points || "0";
-        document.getElementById("user-rank").innerText =
-          user.rank || "Unranked";
-        document.getElementById("co2-saved").innerText = user.co2Saved || "0";
-        // Calculate trees equivalent (e.g., 1 kg CO2 saved ~ 0.05 trees, very rough estimate)
-        document.getElementById("trees-planted-equivalent").innerText = (
-          parseFloat(user.co2Saved || "0") * 0.05
-        ).toFixed(2);
+        updateDashboardMetrics();
 
-        document.getElementById("rvm-uses").innerText = user.rvmUses || "0";
-        document.getElementById("recycling-rate").innerText =
-          user.recyclingRate || "0%";
-        document.getElementById("profile-recycling-rate").innerText =
-          user.recyclingRate || "0%"; // For profile page
-
-        document.getElementById("last-rvm-use").innerText =
-          user.lastRvmUse || "Never";
-        document.getElementById("last-eco-challenge").innerText =
-          user.lastEcoChallenge || "Never";
-
-        // Update funds raised - Using a static value for now as it's a global event total
-        document.getElementById("funds-raised").innerText = "5,250.00"; // Global static value, not user.fundsRaised
-
-        // Initialize by showing the Dashboard section
         showSection("dashboard-section");
       }
 
@@ -505,8 +593,8 @@
         localStorage.removeItem("loggedInUser");
         document.querySelector(".app").style.display = "none";
         document.querySelector(".onboarding").style.display = "none";
-        document.getElementById("login-container").style.display = "flex"; // Show login again
-        document.body.classList.add("login-background"); // Add login background back
+        document.getElementById("login-container").style.display = "flex";
+        document.body.classList.add("login-background");
       }
 
       function toggleDarkMode() {
@@ -518,9 +606,8 @@
         if (savedUser) {
           showApp(savedUser);
         } else {
-          // If not logged in, ensure login page is shown with background
           document.getElementById("login-container").style.display = "flex";
-          document.getElementById("register-box").style.display = "none"; // Hide register
+          document.getElementById("register-box").style.display = "none";
           document.body.classList.add("login-background");
         }
       }
@@ -534,6 +621,65 @@
         alert(
           "Password recovery is not implemented yet. Please contact support or register again."
         );
+      }
+
+      function addPoints(amount) {
+        let currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        if (currentUser) {
+          currentUser.points = (currentUser.points || 0) + amount;
+          currentUser.rvmUses = (currentUser.rvmUses || 0) + 1;
+          currentUser.lastRvmUse = new Date().toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+
+          saveUser(currentUser);
+          updateDashboardMetrics();
+          alert(
+            `You earned ${amount} points! Your total is now ${currentUser.points}.`
+          );
+        }
+      }
+
+      function redeemPoints() {
+        let currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        if (currentUser) {
+          const pointsToRedeem = parseInt(
+            prompt(
+              `You have ${currentUser.points} points. How many points would you like to redeem for a reward? (e.g., 200 for coffee voucher)`
+            )
+          );
+
+          if (isNaN(pointsToRedeem) || pointsToRedeem <= 0) {
+            alert("Please enter a valid number of points.");
+            return;
+          }
+
+          if (currentUser.points >= pointsToRedeem) {
+            currentUser.points -= pointsToRedeem;
+            saveUser(currentUser);
+            updateDashboardMetrics();
+            alert(
+              `Successfully redeemed ${pointsToRedeem} points! Your new balance is ${currentUser.points}. Enjoy your reward!`
+            );
+          } else {
+            alert(
+              `You only have ${currentUser.points} points. You need ${pointsToRedeem} points to redeem this reward.`
+            );
+          }
+        }
+      }
+
+      function toggleSidebar() {
+        const sidebar = document.querySelector(".sidebar");
+        const mainContent = document.querySelector(".main");
+        // Toggle active class on sidebar
+        sidebar.classList.toggle("active");
+        // Toggle sidebar-closed class on main content for desktop
+        if (window.innerWidth > 768) {
+          mainContent.classList.toggle("sidebar-closed");
+        }
       }
     </script>
   </head>
@@ -592,13 +738,14 @@
     <div class="app" style="display: none">
       <div class="sidebar">
         <h2>Lestari Hub</h2>
-        <a href="#" onclick="showSection('dashboard-section')">📊 Dashboard</a>
-        <a href="#" onclick="showSection('profile-section')">👤 Profile</a>
-        <a href="#" onclick="showSection('rewards-section')">🎁 Rewards</a>
-        <a href="#" onclick="showSection('settings-section')">⚙️ Settings</a>
+        <a href="#" onclick="showSection('dashboard-section');">📊 Dashboard</a>
+        <a href="#" onclick="showSection('profile-section');">👤 Profile</a>
+        <a href="#" onclick="showSection('rewards-section');">🎁 Rewards</a>
+        <a href="#" onclick="showSection('settings-section');">⚙️ Settings</a>
         <button class="logout-btn" onclick="logout()">👋 Logout</button>
       </div>
       <div class="main">
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
         <div class="section" id="dashboard-section">
           <h2 id="welcome-user">👋 Welcome!</h2>
           <p>
@@ -635,9 +782,12 @@
             <strong><span id="recycling-rate">0%</span></strong
             >. Let's aim higher!
           </p>
+          <button onclick="addPoints(50)">
+            Simulate RVM Use (Earn 50 points)
+          </button>
           <h4>📍 Find a Reverse Vending Machine Nearby</h4>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15949.63738092285!2d114.8690947!3d4.9806456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3222e430d47d066b%3A0x867c2e2c5e5c7a40!2sTanjong%20Batu%20Beach!5e0!3m2!1sen!2sbn!4v1700000000000!5m2!1sen!2sbn"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15949.771146755712!2d114.86242375!3d4.980690049999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x322301140082c505%3A0x7d6a5c2d3c9076f8!2sTanjong%20Batu%20Beach!5e0!3m2!1sen!2sbn!4v1701389419100!5m2!1sen!2sbn"
             width="100%"
             height="350"
             style="border: 0"
@@ -680,6 +830,13 @@
 
         <div class="section" id="rewards-section" style="display: none">
           <h2>🎁 Exclusive Rewards for You!</h2>
+          <p>
+            Your current redeemable points:
+            <strong><span id="user-points-rewards">0</span> points</strong>
+          </p>
+          <button class="redeem-btn" onclick="redeemPoints()">
+            Redeem Points Now
+          </button>
           <h3>Available Rewards</h3>
           <ul id="rewards-list">
             <li>✨ Free Coffee Voucher (200 pts)</li>
